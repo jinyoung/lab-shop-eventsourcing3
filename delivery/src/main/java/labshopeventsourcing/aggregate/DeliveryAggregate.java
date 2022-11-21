@@ -44,6 +44,10 @@ public class DeliveryAggregate {
     @CommandHandler
     public DeliveryAggregate(AddToDeliveryListCommand command){
 
+        DeliveryStartedEvent event = new DeliveryStartedEvent();
+        BeanUtils.copyProperties(command, event);     
+        apply(event);
+
     }
 
 
