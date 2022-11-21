@@ -33,11 +33,16 @@ public class DeliveryAggregate {
     public DeliveryAggregate(){}
 
     @CommandHandler
-    public DeliveryAggregate(ReturnDeliveryCommand command){
+    public void handle(ReturnDeliveryCommand command){
 
         DeliveryReturnedEvent event = new DeliveryReturnedEvent();
         BeanUtils.copyProperties(command, event);     
         apply(event);
+
+    }
+
+    @CommandHandler
+    public DeliveryAggregate(AddToDeliveryListCommand command){
 
     }
 
@@ -49,12 +54,6 @@ public class DeliveryAggregate {
 
     @EventSourcingHandler
     public void on(DeliveryStartedEvent event) {
-        BeanUtils.copyProperties(event, this);
-    }
-
-
-    @EventSourcingHandler
-    public void on(DeliveryReturnedEvent event) {
         BeanUtils.copyProperties(event, this);
     }
 
