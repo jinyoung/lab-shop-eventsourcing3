@@ -29,7 +29,11 @@ public class PolicyHandler{
     public void wheneverOrderPlaced_AddToDeliveryList(OrderPlacedEvent orderPlaced){
         System.out.println(orderPlaced.toString());
 
+
+
         AddToDeliveryListCommand command = new AddToDeliveryListCommand();
+        command.setOrderId(orderPlaced.getId());
+        command.setId(System.currentTimeMillis());
         commandGateway.send(command);
     }
     @EventHandler

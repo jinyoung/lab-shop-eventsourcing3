@@ -50,12 +50,6 @@ public class DeliveryAggregate {
 
     }
 
-
-
-
-
-
-
     @EventSourcingHandler
     public void on(DeliveryStartedEvent event) {
         BeanUtils.copyProperties(event, this);

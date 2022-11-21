@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@ProcessingGroup("orderStatus")
+@ProcessingGroup("delivery_Policy")
 public class OrderStatusQueryHandler {
 
     private final Map<Long, OrderStatus> data = new HashMap<>();
@@ -39,8 +39,8 @@ public class OrderStatusQueryHandler {
 
 
     @EventHandler
-    public void on(OrderDeliveryStartedEvent orderDeliveryStarted) {
-        OrderStatus orderStatus = data.getOrDefault(orderDeliveryStarted.getId(), null);
+    public void on(DeliveryStartedEvent deliveryStarted) {
+        OrderStatus orderStatus = data.getOrDefault(deliveryStarted.getOrderId(), null);
 
         if( orderStatus != null) {
                 
@@ -48,18 +48,16 @@ public class OrderStatusQueryHandler {
             data.put(orderStatus.getId(), orderStatus);
         }
 
-
     }
+    
     @EventHandler
     public void on(OrderCancelledEvent orderCancelled) {
         OrderStatus orderStatus = data.getOrDefault(orderCancelled.getId(), null);
 
         if( orderStatus != null) {
-                
             orderStatus.setStatus("Cancelled");    
             data.put(orderStatus.getId(), orderStatus);
         }
-
 
     }
 

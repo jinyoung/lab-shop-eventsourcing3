@@ -19,18 +19,19 @@ import labshopeventsourcing.event.*;
 import labshopeventsourcing.aggregate.*;
 
 @Service
-@ProcessingGroup("order_Policy")
+@ProcessingGroup("delivery_Policy")
 public class PolicyHandler{
 
     @Autowired
     CommandGateway commandGateway;
 
-    @EventHandler
-    public void wheneverDeliveryStarted_UpdateStatus(DeliveryStartedEvent deliveryStarted){
-        System.out.println(deliveryStarted.toString());
+    // @EventHandler
+    // public void wheneverDeliveryStarted_UpdateStatus(DeliveryStartedEvent deliveryStarted){
+    //     System.out.println(deliveryStarted.toString());
 
-        UpdateStatusCommand command = new UpdateStatusCommand();
-        commandGateway.send(command);
-    }
+    //     UpdateStatusCommand command = new UpdateStatusCommand();
+    //     command.setId(deliveryStarted.getOrderId());
+    //     commandGateway.send(command);
+    // }
 
 }
