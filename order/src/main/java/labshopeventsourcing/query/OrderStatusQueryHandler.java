@@ -31,8 +31,8 @@ public class OrderStatusQueryHandler {
 
         orderStatus.setId(orderPlaced.getId());
         orderStatus.setStatus(orderPlaced.getStatus());
-        orderStatus.setAmount(Long.valueOf(orderPlaced.getAmount()));
-        orderStatus.setQty(orderPlaced.getQty());
+        //orderStatus.setAmount(orderPlaced.getAmount()));
+        //orderStatus.setQty(orderPlaced.getQty());
 
         data.put(orderStatus.getId(), orderStatus);
     }
