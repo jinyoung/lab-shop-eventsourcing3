@@ -1,12 +1,12 @@
 package labshopeventsourcing.event;
 
+
+
 import lombok.Data;
 import lombok.ToString;
 
-
-
-@Data
 @ToString
+@Data
 public class OrderCancelledEvent {
 
     private Long id;

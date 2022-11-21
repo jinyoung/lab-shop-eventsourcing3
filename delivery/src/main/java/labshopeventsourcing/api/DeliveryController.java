@@ -31,8 +31,9 @@ public class DeliveryController {
       this.queryGateway = queryGateway;
   }
 
-  @RequestMapping(value = "/deliveries",
-        method = RequestMethod.POST,
+
+  @RequestMapping(value = "/returndelivery",
+        method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8")
   public CompletableFuture returnDelivery(@RequestBody ReturnDeliveryCommand returnDeliveryCommand)
         throws Exception {
@@ -40,6 +41,17 @@ public class DeliveryController {
 
       // send command
       return commandGateway.send(returnDeliveryCommand);
+  }
+
+  @RequestMapping(value = "/deliveries",
+        method = RequestMethod.POST,
+        produces = "application/json;charset=UTF-8")
+  public CompletableFuture addToDeliveryList(@RequestBody AddToDeliveryListCommand addToDeliveryListCommand)
+        throws Exception {
+      System.out.println("##### /delivery/addToDeliveryList  called #####");
+
+      // send command
+      return commandGateway.send(addToDeliveryListCommand);
   }
 
 }

@@ -40,13 +40,11 @@ public class OrderStatusQueryHandler {
 
     @EventHandler
     public void on(OrderDeliveryStartedEvent orderDeliveryStarted) {
-            // view 객체 조회
         OrderStatus orderStatus = data.getOrDefault(orderDeliveryStarted.getId(), null);
 
         if( orderStatus != null) {
                 
             orderStatus.setStatus("DeliveryStarted");    
-            // view 레파지 토리에 save
             data.put(orderStatus.getId(), orderStatus);
         }
 
@@ -54,13 +52,11 @@ public class OrderStatusQueryHandler {
     }
     @EventHandler
     public void on(OrderCancelledEvent orderCancelled) {
-            // view 객체 조회
         OrderStatus orderStatus = data.getOrDefault(orderCancelled.getId(), null);
 
         if( orderStatus != null) {
                 
             orderStatus.setStatus("Cancelled");    
-            // view 레파지 토리에 save
             data.put(orderStatus.getId(), orderStatus);
         }
 
