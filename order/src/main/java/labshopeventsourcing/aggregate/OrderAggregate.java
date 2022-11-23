@@ -75,7 +75,13 @@ public class OrderAggregate {
 
     @EventSourcingHandler
     public void on(OrderCancelledEvent event) {
-        BeanUtils.copyProperties(event, this);
+        setStatus("CANCELLED");
+    }
+
+
+    @EventSourcingHandler
+    public void on(OrderDeliveryStartedEvent event) {
+        setStatus("DELIVERED");
     }
 
 
