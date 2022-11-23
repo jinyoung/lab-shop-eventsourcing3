@@ -3,6 +3,12 @@ server:
   error:
     include-message: always
 
+axon:
+  eventhandling:
+    processors:
+      PolicyHandler:
+        mode: subscribing
+
 ---
 
 spring:

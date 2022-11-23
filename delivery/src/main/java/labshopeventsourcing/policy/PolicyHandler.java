@@ -1,6 +1,7 @@
 package labshopeventsourcing.policy;
 
 import org.axonframework.config.ProcessingGroup;
+import org.axonframework.eventhandling.DisallowReplay;
 import org.axonframework.eventhandling.EventHandler;
 import org.axonframework.queryhandling.QueryHandler;
 
@@ -19,13 +20,14 @@ import labshopeventsourcing.event.*;
 import labshopeventsourcing.aggregate.*;
 
 @Service
-@ProcessingGroup("delivery_Policy")
+@ProcessingGroup("PolicyHandler")
 public class PolicyHandler{
 
     @Autowired
     CommandGateway commandGateway;
 
     @EventHandler
+    @DisallowReplay
     public void wheneverOrderPlaced_AddToDeliveryList(OrderPlacedEvent orderPlaced){
         System.out.println(orderPlaced.toString());
 
@@ -36,7 +38,9 @@ public class PolicyHandler{
         command.setId(System.currentTimeMillis());
         commandGateway.send(command);
     }
+    
     @EventHandler
+    @DisallowReplay
     public void wheneverOrderCancelled_ReturnDelivery(OrderCancelledEvent orderCancelled){
         System.out.println(orderCancelled.toString());
 
